@@ -17,9 +17,9 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         flexDirection:'row',
         borderBottomWidth:1,
-        borderBottomColor: '#bf8d3a',
+        borderBottomColor: 'rgba(101,225,87,1)',
     },
     headerText: {
-        color: '#bf8d3a',
+        color: 'rgba(101,225,87,1)',
     },
 })

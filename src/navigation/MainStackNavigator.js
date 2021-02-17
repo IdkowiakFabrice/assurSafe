@@ -6,6 +6,8 @@ import Accueil from '../screens/Accueil'
 import Login from '../screens/Login'
 import Register from '../screens/Register'
 import RegisterSuccess from '../screens/RegisterSuccess'
+import FolderList from '../screens/FolderList'
+import FolderFiles from '../screens/FolderFiles'
 
 const Stack = createStackNavigator()
 
@@ -22,6 +24,8 @@ function MainStackNavigator() {
           <Stack.Screen name='Login' component={Login}  />
           <Stack.Screen name='Register' component={Register}  />
           <Stack.Screen name='RegisterSuccess' component={RegisterSuccess}  />
+          <Stack.Screen name='FolderList' component={FolderList}  />
+          <Stack.Screen name='FolderFiles' component={FolderFiles}  />
         </Stack.Navigator>
       </NavigationContainer>
     )

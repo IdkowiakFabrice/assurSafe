@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     },
     uText: {
         color: 'rgba(101,225,87,1)',
-        fontSize: '15px',
         marginTop: '70%',
 
     },

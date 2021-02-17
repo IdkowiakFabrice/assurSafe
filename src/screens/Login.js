@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, Dimensions, TouchableOpacity, TextInput, ImageBackground } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as axios from 'axios'
 
 const{width: WIDTH} = Dimensions.get('window') 
@@ -14,9 +15,10 @@ export class Login extends Component {
         };
     }
 
-    _storeData = (token, idUser) => {
+    _storeData = async (token, idUser) => {
         try {
-          AsyncStorage.multiSet([['@token', token], ['@idUser', idUser]])
+            await AsyncStorage.setItem('@token', token)
+            await AsyncStorage.setItem('@idUser', idUser)
         } catch (error) {
          console.error(error);
         }
@@ -36,7 +38,7 @@ export class Login extends Component {
         axios.post(link, user, axiosConfig)
         .then((response) => {
             this._storeData(response.data.data.meta.token, response.data.data.user.id.toString());
-            this.props.navigation.navigate('ChampionsListPage')
+            this.props.navigation.navigate('FolderList')
         })
         .catch((error) => {
             console.log(error);
