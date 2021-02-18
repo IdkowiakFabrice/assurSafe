@@ -64,6 +64,10 @@ export default class FolderFiles extends Component {
         const __startCamera = async () => {
             this.setState({ startCamera: true })
         }
+
+        const _returnLastPage = () => {
+            this.props.navigation.navigate('FolderList')
+        }
         return (
             <ImageBackground source={require('../../assets/greenBackground.png')} style={{ width: '100%', height: '100%', flex: 1 }}>
                 {this.state.startCamera === true ?
@@ -73,10 +77,33 @@ export default class FolderFiles extends Component {
                     :
                     <View>
                         <TouchableOpacity
-                            onPress={__startCamera}
+                            onPress={_returnLastPage}
                             style={{
                                 alignSelf: 'center',
                                 marginTop: '20%',
+                                marginBottom: 10,
+                                width: 100,
+                                borderRadius: 4,
+                                backgroundColor: 'black',
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                height: 25
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    color: '#rgba(101,225,87,1)',
+                                    fontWeight: 'bold',
+                                    textAlign: 'center'
+                                }}>
+                                Retour
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={__startCamera}
+                            style={{
+                                alignSelf: 'center',
                                 marginBottom: '20%',
                                 width: 200,
                                 borderRadius: 4,

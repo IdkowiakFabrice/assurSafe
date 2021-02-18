@@ -22,6 +22,10 @@ export default class FolderList extends Component {
         this.retrieveFolders()
     }
 
+    componentWillUnmount() {
+        
+    }
+
     retrieveFolders = async () => {
         try {
             const retrieveToken = await AsyncStorage.getItem('@token');
@@ -83,9 +87,29 @@ export default class FolderList extends Component {
     }
 
     goToFolder = (idDossier) => {
-            console.log("PATCHAKWAK")
             AsyncStorage.setItem('@idDossier', idDossier.toString())
             this.props.navigation.navigate('FolderFiles') 
+    }
+
+    deleteFolder = (idDossier) => {
+        const link = `https://patchakwak.herokuapp.com/api/users/${this.state.idUser}/dossiers/${idDossier}`
+        let axiosConfig = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.state.token
+            }
+        };
+        axios.delete(link, axiosConfig)
+            .then((response) => {
+                try {
+                    console.log('It works')
+                } catch(error) {
+                    console.log(error)
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     render() {
@@ -116,6 +140,10 @@ export default class FolderList extends Component {
                             style={styles.folderButton}
                             onPress={() => this.goToFolder(folder.id)}>
                             <Text style={styles.buttonAddText}>{folder.name}</Text>
+                            <TouchableOpacity
+                            onPress={() => this.deleteFolder(folder.id)}>
+                                <Text>X</Text>
+                            </TouchableOpacity>
                         </TouchableOpacity>
                     ))
                     : null
@@ -147,7 +175,8 @@ const styles = StyleSheet.create({
         color: 'rgba(101,225,87,1)',
         paddingHorizontal: 20,
         padding: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        marginLeft: 20
     },
     mesDossiersText: {
         fontSize: 20,
